@@ -4,7 +4,7 @@ const mutations = {
   setMenu(state, val) {
     state.menu = val;
   },
-  setHotplace(state, val) {
+  setHotPlace(state, val) {
     state.hotPlace = val;
   }
 };
@@ -13,8 +13,8 @@ const actions = {
   setMenu: ({ commit }, menu) => {
     commit("setMenu", menu);
   },
-  setHotplace: ({ commit }, hotPlace) => {
-    commit("setHotplace", hotPlace);
+  setHotPlace: ({ commit }, hotPlace) => {
+    commit("setHotPlace", hotPlace);
   }
 };
 

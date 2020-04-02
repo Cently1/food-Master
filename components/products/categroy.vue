@@ -18,27 +18,26 @@
 </template>
 
 <script>
-import iselect from './iselect.vue'
+import iselect from "./iselect.vue";
 export default {
-    components:{
-        iselect
+  components: {
+    iselect
+  },
+  props: {
+    types: {
+      type: Array,
+      default() {
+        return [];
+      }
     },
-    props:{
-        type:{
-            type:Array,
-            default(){
-                return []
-            }
-        },
-            props:{
-        areas:{
-            areas:Array,
-            default(){
-                return []
-            }
+      areas: {
+        type: Array,
+        default() {
+          return [];
         }
+      }
     }
-};
+}
 </script>
 
 <style lang="scss">

@@ -7,7 +7,7 @@
         :class="[item.name, item.active ? 's-nav-active' : '']"
         @click="navSelect"
       >
-        {{ item.name }}
+        {{ item.txt }}
       </dd>
     </dl>
     <ul>
