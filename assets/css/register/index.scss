@@ -1,0 +1,106 @@
+body {
+  .re {
+    height: 100%;
+    background: #000;
+    .page-register {
+      .header {
+        border-bottom: 2px solid white;
+        min-width: 980px;
+        color: #666;
+
+        header {
+          margin: 0 auto;
+          padding: 10px 0;
+          width: 980px;
+
+          .site-logo {
+            display: inline-block;
+            width: 128px;
+            width: 54px;
+            height: 36px;
+            text-indent: -9999px;
+            background-position: -669px -748px;
+            background-image: url(//s0.meituan.net/bs/file/?f=fe-sso-fs:build/assets/sp-normal.2ee5c09.png);
+          }
+
+          .login {
+            float: right;
+          }
+
+          .bold {
+            font-style: normal;
+          }
+        }
+        .el-button--small {
+          background: #2ecc71;
+          border-color: none;
+        }
+        span{
+          color:white;
+          font-size:14px;
+        }
+        .bold {
+          color: white;
+        }
+      }
+
+      > section {
+        margin: 0 auto 30px;
+        padding-top: 30px;
+        width: 980px;
+        min-height: 300px;
+        padding-right: 550px;
+        box-sizing: border-box;
+        position: relative;
+
+        .status {
+          font-size: 12px;
+          margin-left: 20px;
+          color: #e6a23c;
+        }
+
+        .error {
+          color: red;
+        }
+        .el-button {
+          border-radius: 30px;
+        }
+        .el-button--primary {
+          width: 250px;
+          height: 45px;
+          background: #2ecc71;
+          border-color: #2ecc71;
+          &:hover {
+            background-image: linear-gradient(
+              transparent,
+              rgba(0, 0, 0, 0.05) 40%,
+              rgba(0, 0, 0, 0.1)
+            );
+          }
+        }
+      }
+      .demo-ruleForm {
+        border-radius: 15px 15px 15px 15px;
+        background-color: #ecf0f1;
+        position: absolute;
+        left: 250px;
+        top: 100px;
+      }
+      .el-form-item__content {
+        margin-right: 40px;
+        margin-top: 10px;
+      }
+      .el-form-item {
+        margin-bottom: 16px;
+      }
+      .el-form-item__label {
+        margin-top: 10px;
+      }
+      .f1 {
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 45px;
+      }
+    }
+  }
+}
