@@ -2,7 +2,7 @@
   <section class="m-istyle">
     <dl @mouseover="over">
       <dt>有特色</dt>
-      <dd :class="{ active: kind == 'add' }" kind="all" keyword="景点">全部</dd>
+      <dd :class="{ active: kind == 'all' }" kind="all" keyword="景点">全部</dd>
       <dd :class="{ active: kind == 'part' }" kind="part" keyword="美食">
         约会聚餐
       </dd>
@@ -26,7 +26,7 @@
               <span>{{ item.pos }}</span>
             </li>
             <li class="price">
-              ￥<em>{{ item.price }}</em
+              ￥<em>{{ item.price==0||item.price==''||item.price==undefined?Math.floor(Math.random()*100):item.price }}</em
               ><span>/起</span>
             </li>
           </ul>
@@ -55,6 +55,34 @@ export default {
       return this.list[this.kind];
     }
   },
+  async mounted() {
+    let self = this;
+    let {
+      status,
+      data: { count, pois }
+    } = await self.$axios.get("/search/resultsByKeywords", {
+      params: {
+        keyword: "景点",
+        city: self.$store.state.geo.position.city
+      }
+    });
+    if (status === 200 && count > 0) {
+      let r = pois
+        .filter(item => item.photos.length)
+        .map(item => {
+          return {
+            title: item.name,
+            pos: item.type.split(";")[0],
+            price: item.biz_ext.cost || "暂无",
+            img: item.photos[0].url,
+            url: "//abc.com"
+          };
+        });
+      self.list[self.kind] = r.slice(0, 9);
+    } else {
+      self.list[self.kind] = [];
+    }
+  },
   methods: {
     over: async function(e) {
       let dom = e.target;
@@ -66,7 +94,7 @@ export default {
         let {
           status,
           data: { count, pois }
-        } = await self.$axios.get("/search/resultByKey", {
+        } = await self.$axios.get("/search/resultsByKeywords", {
           params: {
             keyword,
             city: self.$store.state.geo.position.city

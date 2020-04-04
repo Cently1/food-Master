@@ -1,7 +1,7 @@
 <template>
   <div class="m-product-select">
     <dl class="tab">
-      <dt>{{ name }}<i class="el-icon-arrow-down el-icon--right" /></dt>
+      <dt>{{ name }}<i class="el-icon-arrow-down el-icon--right"/></dt>
       <dd>
         <h3>{{ name }}</h3>
         <span v-for="(item, idx) in list" :key="idx">{{ item }}</span>
@@ -18,7 +18,7 @@ export default {
             default:''
         },
         list:{
-            type:String,
+            type:Array,
             default(){
                 return []
             }

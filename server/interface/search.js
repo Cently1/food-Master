@@ -23,13 +23,13 @@ router.get("/top", async ctx => {
 });
 //hotPlace
 router.get("/hotPlace", async ctx => {
-  let city = ctx.store ? ctx.store.geo.positon.city : ctx.query.city;
+  let city = ctx.store ? ctx.store.geo.position.city : ctx.query.city;
   let {
     status,
     data: { result }
   } = await axios.get(`http://cp-tools.cn/search/hotPlace`, {
     params: {
-      city
+      city:city
     }
   });
   ctx.body = {
@@ -42,15 +42,15 @@ router.get("/resultsByKeywords", async ctx => {
   let {
     status,
     data: { count, pois }
-  } = await axios.get(`http://cp-tools.cn/search/results`, {
+  } = await axios.get("http://cp-tools.cn/search/resultsByKeywords", {
     params: {
       city,
       keyword
     }
   });
   ctx.body = {
-      count:status===200?count:0,
-      pois:status===200?pois:0
+    count: status === 200 ? count : 0,
+    pois: status === 200 ? pois : 0
   };
 });
 

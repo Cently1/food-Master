@@ -28,7 +28,7 @@
         <span class="s-item-addr">{{ meta.addr }}</span>
       </p>
       <p>
-        <em class="s-item-price">￥{{ meta.price }}起</em>
+        <em class="s-item-price">￥{{ meta.price===0?Math.floor(Math.random()*100):meta.price }}起</em>
         <b>{{ meta.status }}</b>
       </p>
       <ul>

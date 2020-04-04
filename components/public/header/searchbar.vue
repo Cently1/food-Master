@@ -25,9 +25,9 @@
               v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)"
               :key="idx"
             >
-              <a
-                :href="'/products?keyword=' + encodeURIComponent(item.name)"
-              ></a>
+              <a :href="'/products?keyword=' + encodeURIComponent(item.name)">{{
+                item.name
+              }}</a>
             </dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">

@@ -60,7 +60,7 @@ export default {
         marker.setMap(map);
       });
     };
-    const url = `https://webapi.amap.com/maps?v=1.4.10&key=${self.key}&callback=onmaploaded`;
+    const url = `https://webapi.amap.com/maps?v=1.4.10&key=${self.key}&callback=onmapLoaded`;
     let jsapi = document.createElement("script");
     jsapi.charset = "utf-8";
     jsapi.src = url;

@@ -23,7 +23,7 @@ router.get("/getPosition", async ctx => {
     };
   }
 });
-
+//获取切换城市的省份
 router.get("/province", async ctx => {
   let {
     status,
@@ -51,7 +51,7 @@ router.get("/province/:id", async ctx => {
     };
   }
 });
-
+//获取所有的城市列表
 router.get("/city", async ctx => {
   let {
     status,
@@ -68,7 +68,7 @@ router.get("/city", async ctx => {
   }
 });
 
-//热门城市
+//热门城市的推荐
 router.get("/hotCity", async ctx => {
   let {
     status,

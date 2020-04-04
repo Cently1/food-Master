@@ -1,15 +1,15 @@
 <template>
   <section class="m-istyle">
-    <dl>
+    <dl style="background-color: rgb(255, 209, 72);background-image: linear-gradient(to right, rgb(85, 19, 255) 3%, rgb(255, 209, 72) 100%);">
       <dt>达人电影</dt>
       <dd :class="{ active: kind == 'all' }" kind="all" keyword="即将上演">
         即将上演
       </dd>
     </dl>
     <ul class="ibody">
-      <li v-for="item in cur" :key="item.title">
+      <li v-for="item in cur" :key="item.title" style="width:214px;height:297px;margin: 0px 9px;">
         <el-card :body-style="{ padding: '0px' }" shadow="never">
-          <img :src="item.img" class="image" />
+          <img :src="item.img" class="image" style="width:214px;height:297px;"/>
           <ul class="cbody">
             <li class="title">{{ item.title }}</li>
             <li class="pos">
