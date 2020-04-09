@@ -92,13 +92,13 @@ export default {
       status,
       data: { code, list }
     } = await ctx.$axios.post("/order/getOrders");
-    if (status === 200 && code === 0 && llist.length) {
+    if (status === 200 && code === 0 && list.length) {
       return {
         list: list.map(item => {
           return {
             img: item.imgs.length ? item.imgs[0].url : "/logo.png",
             name: item.name,
-            count: 1,
+            count: item.count,
             total: item.total,
             status: item.status,
             statusTxt: item.status === 0 ? "待付款" : "已付款"
@@ -108,7 +108,7 @@ export default {
           return {
             img: item.imgs.length ? item.imgs[0].url : "/logo.png",
             name: item.name,
-            count: 1,
+            count:item.count,
             total: item.total,
             status: item.status,
             statusTxt: item.status === 0 ? "待付款" : "已付款"
@@ -120,6 +120,6 @@ export default {
 };
 </script>
 
-<style lange="scss">
+<style lang="scss">
 @import "@/assets/css/order/index.scss";
 </style>

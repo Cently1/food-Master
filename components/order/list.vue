@@ -6,12 +6,15 @@
                     <el-col :span="4">
                         <img :src="item.img" alt="">
                     </el-col>
-                    <el-col :span="10">
+                    <el-col :span="7">
                         <h4>{{item.name}}</h4>
                         <p>数量:{{item.count}}</p>
                     </el-col>
                     <el-col :span="4">总价:￥{{item.total}}</el-col>
                     <el-col :span="6">{{item.statusTxt}}</el-col>
+                    <el-col :span="3">
+                        <el-button type="danger" plain @click="deleteClick">删除</el-button>
+                    </el-col>
                 </el-row>
             </li>
             <li v-else class="empty">没有订单</li>
@@ -27,6 +30,15 @@ export default {
             default:()=>{
                 return []
             }
+        }
+    },
+    methods:{
+        deleteClick:function(){
+        if(status==200&&code===0){
+        this.$alert('删除成功',{
+          confirmButtonText:'确定',
+        })
+      }
         }
     }
 }
