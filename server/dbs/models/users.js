@@ -4,15 +4,15 @@ const UserSchema=new Schema({
     username:{
         type:String,
         unique:true,
-        required:true
+        require:true
     },
     password:{
         type:String,
-        required:true
+        require:true
     },
     email:{
         type:String,
-        required:true
+        require:true
     }
 })
 

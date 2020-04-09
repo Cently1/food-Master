@@ -41,32 +41,32 @@ export default {
   components: {
     Crumbs,
     Summa,
-    List,
+    List
   },
   computed: {
-    canOrder: function () {
-      return this.list.filter((item) => item.photos.length).length;
-    },
+    canOrder: function() { 
+      return this.list.filter(item => item.photos.length).length;
+    }
   },
   async asyncData(ctx) {
     let { keyword, type } = ctx.query;
     let {
       status,
-      data: { product, more: list, login },
+      data: { product, more:list, login }
     } = await ctx.$axios.get("/search/products", {
       params: {
         keyword,
         type,
-        city: ctx.store.state.geo.position.city,
-      },
-    });
+        city: ctx.store.state.geo.position.city
+      }
+    });         
     if (status === 200) {
       return {
         keyword,
         product,
         type,
         list,
-        login,
+        login
       };
     } else {
       return {
@@ -74,10 +74,10 @@ export default {
         product: {},
         type,
         list: [],
-        login: false,
+        login: false
       };
     }
-  },
+  }
 };
 </script>
 

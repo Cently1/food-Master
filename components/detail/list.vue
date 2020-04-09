@@ -11,7 +11,7 @@
 import Item from "./item";
 export default {
   components: {
-    Item,
+    Item
   },
   props: {
     list: {
@@ -20,7 +20,8 @@ export default {
         return [];
       },
     },
-  },
+  }
+
 };
 </script>
 

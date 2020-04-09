@@ -65,7 +65,7 @@ export default {
               name: item.name,
               comment: Math.floor(Math.random() * 10000),
               rate: Number(item.biz_ext.rating),
-              price: Number(item.biz_ext.cost),
+              price: Math.floor(Math.random() * 100),
               scene: item.tag,
               tel: item.tel,
               status: "可订明日",

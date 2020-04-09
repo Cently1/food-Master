@@ -13,7 +13,7 @@
           <span v-if="meta.deadline">截止日期:{{ meta.deadline }}</span>
         </p>
         <p>
-          <span class="price">{{ Number(meta.biz - ext.cost) }}</span>
+          <span class="price">{{ Number(meta.biz_ext.cost) }}</span>
           <sub>门店价{{ Number(meta.biz_ext.cost) }}</sub>
         </p>
       </dd>
@@ -31,33 +31,36 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   methods: {
-    createCart: async function () {
+    createCart: async function() {
       let self = this;
       let {
         status,
-        data: { code, id },
+        data: { code, id }
       } = await this.$axios.post("/cart/create", {
         params: {
-          id: Math.random().toString().slice(3, 9),
+          id: Math.random()
+            .toString()
+            .slice(3, 9),
           detail: {
-              name:self.meta.name,
-              price:self.meta.biz_ext.cost,
-              imgs:self.meta.photos
-          },
-        },
+            name: self.meta.name,
+            price:  23,
+            imgs: self.meta.photos
+          }
+        }
       });
-      if(status===200&&code===0){
-          window.location.href=`/cart/?id=${id}`
-      }else{
-          console.log('erros');
-          
+      if (status === 200 && code === 0) {
+        window.location.href = `/cart/?id=${id}`;
+        console.log(status, code);
+      } else {
+        console.log(status, code);
+        console.log("error");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
