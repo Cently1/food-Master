@@ -54,9 +54,7 @@ export default {
       });
       if (status === 200 && code === 0) {
         window.location.href = `/cart/?id=${id}`;
-        console.log(status, code);
       } else {
-        console.log(status, code);
         console.log("error");
       }
     }

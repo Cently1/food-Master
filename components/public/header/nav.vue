@@ -2,19 +2,19 @@
   <div class="m-nav">
     <ul class="nav">
       <li class="list">
-        <nuxt-link to="/my">我的美团</nuxt-link>
+        <nuxt-link to="/my" class="my">我的美团</nuxt-link>
         <dl>
           <dd><nuxt-link to="/order">我的订单</nuxt-link></dd>
-          <dd><nuxt-link to="/favorite">收藏夹</nuxt-link></dd>
-          <dd><nuxt-link to="/voucher">抵用券</nuxt-link></dd>
-          <dd><nuxt-link to="/count">账户设置</nuxt-link></dd>
+          <dd><nuxt-link to="/order">收藏夹</nuxt-link></dd>
+          <dd><nuxt-link to="/order">抵用券</nuxt-link></dd>
+          <dd><nuxt-link to="/order">账户设置</nuxt-link></dd>
         </dl>
       </li>
       <li>
-        <nuxt-link to="/order">手机App</nuxt-link>
+        <nuxt-link to="/app" class="app">手机App</nuxt-link>
       </li>
       <li class="list bd">
-        <nuxt-link to="/center">商家中心</nuxt-link>
+        <nuxt-link to="/center" class="center">商家中心</nuxt-link>
         <dl>
           <dd><nuxt-link to="userCenter">商家中心</nuxt-link></dd>
           <dd><nuxt-link to="coop">我想合作</nuxt-link></dd>
@@ -23,7 +23,7 @@
         </dl>
       </li>
       <li class="list site">
-        <nuxt-link to="/site">网站导航</nuxt-link>
+        <nuxt-link to="/order" class="site">网站导航</nuxt-link>
         <div class="subContainer">
           <dl class="hotel"> 
             <dt>酒店旅游</dt>
@@ -52,7 +52,7 @@
             <dd>烧烤</dd>
           </dl>
           <dl class="movie">
-            <dl>看电影</dl>
+            <dt>看电影</dt>
             <dd>青春偶像剧</dd>
             <dd>青春偶像剧</dd>
             <dd>青春偶像剧</dd>
@@ -63,7 +63,7 @@
             <dd>青春偶像剧</dd>
           </dl>
           <dl class="app">
-            <dl>手机应用</dl>
+            <dt>手机应用</dt>
             <dd>
               <a href="#">
                 <img

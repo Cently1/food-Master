@@ -1,13 +1,11 @@
 .page-cart {
   width: 1190px;
   margin: 20px auto;
-
   .m-cart {
     > p {
       text-align: right;
       width: 1190px;
     }
-
     .post {
       width: 1190px;
     }
@@ -25,7 +23,7 @@
     background: #f8f8f8;
     width: 1190px;
     margin: 0 auto;
-    padding-top: 10px;
+    padding-top: 11px;
 
     > section {
       width: 1190px;
@@ -41,11 +39,16 @@
 
     > div.post {
       text-align: right;
+      .el-button {
+        background: #fe6428;
+        border: none;
+        margin-top: 12px;
+      }
     }
 
     .money {
       font-size: 20px;
-      color: #f76120;
+      color: red;
       font-style: normal;
     }
   }

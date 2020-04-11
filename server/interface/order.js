@@ -57,7 +57,7 @@ router.post("/getOrders", async ctx => {
     };
   } else {
     try {
-      let result = await Order.find().limit(10);
+      let result = await Order.find();
       if (result) {
         ctx.body = {
           code: 0,
@@ -75,6 +75,22 @@ router.post("/getOrders", async ctx => {
         list: []
       };
     }
+  }
+});
+//删除订单
+router.post("/deleteOrder", async ctx => {
+  const {id}=ctx.request.body
+  const order = await Order.where({
+    id: id
+  }).remove();
+  if (order) {
+    ctx.body = {
+      code: 0
+    };
+  } else {
+    ctx.body = {
+      code: -1
+    };
   }
 });
 export default router;

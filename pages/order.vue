@@ -2,7 +2,7 @@
   <div class="page-order">
     <el-row>
       <el-col :span="4" class="navbar">
-        <h3>我的美团</h3>
+        <h3>我的食达人</h3>
         <dl>
           <dt>我的订单</dt>
           <dd><i class="el-icon-arrow-right" />全部订单</dd>
@@ -27,10 +27,10 @@
       <el-col :span="19" class="table">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="全部订单" name="all"
-            ><list :cur="cur"
+            ><list :cur="cur" @refresh="refresh"
           /></el-tab-pane>
           <el-tab-pane label="待付款" name="unpay"
-            ><list :cur="cur"
+            ><list :cur="cur" @refresh="refresh"
           /></el-tab-pane>
           <el-tab-pane label="待使用" name="unuse"
             ><list :cur="cur"
@@ -85,6 +85,36 @@ export default {
   methods: {
     handleClick: function(tab) {
       this.activeName = tab.name;
+    },
+    refresh: function(val) {
+      this.getOrders();
+      this.name = "all";
+    },
+    getOrders() {
+      let status, code, list;
+      this.$axios.post("/order/getOrders").then(res => {
+        status = res.status;
+        code = res.data.code;
+        list = res.data.list;
+        if (status === 200 && code === 0 && list.length) {
+          this.$alert("删除成功", {
+            confirmButtonText: "确定"
+          });
+          this.list = list.map(item => {
+            return {
+              img: item.imgs.length ? item.imgs[0].url : "/logo.png",
+              id: item.id,
+              name: item.name,
+              count: item.count,
+              total: item.total,
+              status: item.status,
+              statusTxt: item.status === 0 ? "待付款" : "已付款"
+            };
+          });
+        } else {
+          this.list = [];
+        }
+      });
     }
   },
   async asyncData(ctx) {
@@ -97,6 +127,7 @@ export default {
         list: list.map(item => {
           return {
             img: item.imgs.length ? item.imgs[0].url : "/logo.png",
+            id: item.id,
             name: item.name,
             count: item.count,
             total: item.total,
@@ -104,11 +135,12 @@ export default {
             statusTxt: item.status === 0 ? "待付款" : "已付款"
           };
         }),
-        cur:list.map(item => {
+        cur: list.map(item => {
           return {
             img: item.imgs.length ? item.imgs[0].url : "/logo.png",
+            id: item.id,
             name: item.name,
-            count:item.count,
+            count: item.count,
             total: item.total,
             status: item.status,
             statusTxt: item.status === 0 ? "待付款" : "已付款"
