@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import {Message} from 'element-ui'
 export default {
   props: {
     cur: {
@@ -42,16 +43,14 @@ export default {
       } = await this.$axios.post("/order/deleteOrder", {
         id: oID
       });
-      if (status === 200 && code===0) {
-        this.$alert("删除成功", {
-          confirmButtonText: "确定"
-        });
+      if (status === 200 && code === 0) {
+         Message.success('删除成功',{customClass: 'message-logout'});
       }
       //1.父组件绑定一个事件
       //2.子组件使用$emit的方法发送
       //3.父组件的函数里面接收子组件传递的值
-       let flag = false;
-          this.$emit('refresh',oID);
+      let flag = false;
+      this.$emit("refresh", oID);
     }
   }
 };

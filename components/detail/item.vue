@@ -48,10 +48,10 @@ export default {
           detail: {
             name: self.meta.name,
             price:  23,
-            imgs: self.meta.photos
+            imgs:self.meta.photos.length ? self.meta.photos[0].url: "/logo.png"
           }
         }
-      });
+      });      
       if (status === 200 && code === 0) {
         window.location.href = `/cart/?id=${id}`;
       } else {

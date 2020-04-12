@@ -9,17 +9,21 @@ const Cart = new Schema({
     type: Array,
     require: true
   },
+  imgs: {
+    type: Array,
+    require: true
+  },
   cartNo: {
     type: String,
     require: true
   },
-  user:{
-      type:String,
-      require:true
+  user: {
+    type: String,
+    require: true
   },
-  time:{
-      type:Date,
-      require:true
+  time: {
+    type: Date,
+    require: true
   }
 });
 

@@ -1,6 +1,12 @@
 <template>
   <el-table :data="cartData" style="width: 1190px">
-    <el-table-column label="项目" width="532" prop="name" />
+    <el-table-column label="商品图片" width="332" prop="imgs" v-for="(item, idx) in cartData" :key="idx">
+      <img
+        :src="item.imgs"
+        alt=""
+      style="width:150px;height:150px;"/>
+    </el-table-column>
+    <el-table-column label="商品名称" width="232" prop="name" />
     <el-table-column label="单价" width="182" prop="price" />
     <el-table-column label="数量" width="252">
       <template slot-scope="scope">
@@ -17,11 +23,11 @@
 
 <script>
 export default {
-  props:{
-    cartData:{
-      type:Array,
-      default:()=>{
-        return []
+  props: {
+    cartData: {
+      type: Array,
+      default: () => {
+        return [];
       }
     }
   }

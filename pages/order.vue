@@ -97,9 +97,6 @@ export default {
         code = res.data.code;
         list = res.data.list;
         if (status === 200 && code === 0 && list.length) {
-          this.$alert("删除成功", {
-            confirmButtonText: "确定"
-          });
           this.list = list.map(item => {
             return {
               img: item.imgs.length ? item.imgs[0].url : "/logo.png",

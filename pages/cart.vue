@@ -2,7 +2,8 @@
   <div class="page-cart">
     <el-row class="m-title">
       <el-col :span="24">
-      <span class="icon-cart">我的购物车</span>
+        <i class="el-icon-shopping-cart-2"></i
+        ><span class="cart">我的购物车</span>
       </el-col>
     </el-row>
     <el-row>
@@ -56,7 +57,7 @@ export default {
         this.$alert(`恭喜您，已成功下单，订单号:${id}`, "下单成功", {
           confirmButtonText: "确定",
           callback: action => {
-            location.href = "/order";
+            location.href = "/pay";
           }
         });
       }
@@ -67,7 +68,7 @@ export default {
       status,
       data: {
         code,
-        data: { name, price }
+        data: {imgs, name, price }
       }
     } = await ctx.$axios.post("/cart/getCart", {
       id: ctx.query.id
@@ -76,6 +77,7 @@ export default {
       return {
         cart: [
           {
+            imgs,
             name,
             price,
             count: 1
