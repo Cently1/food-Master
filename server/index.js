@@ -16,7 +16,7 @@ import search from "./interface/search";
 import categroy from "./interface/categroy";
 import cart from "./interface/cart";
 import order from "./interface/order";
-
+import alipay from "./interface/alipay";
 
 const app = new Koa();
 const host = process.env.HOST || "127.0.0.1";
@@ -68,6 +68,9 @@ app.use(search.routes()).use(search.allowedMethods());
 app.use(categroy.routes()).use(categroy.allowedMethods());
 app.use(cart.routes()).use(cart.allowedMethods());
 app.use(order.routes()).use(order.allowedMethods());
+
+app.use(alipay.routes()).use(alipay.allowedMethods());
+
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Bypass Koa's built-in response handling

@@ -4,13 +4,15 @@
       <el-col :span="24"
         ><div class="grid-content bg-purple-dark">
           <i class="el-icon-time"></i
-          ><span>请在 23:30:35 内完成支付, 超时订单会自动取消</span>
+          ><span
+            >请在 <strong>30分钟</strong> 内完成支付, 超时订单会自动取消</span
+          >
         </div></el-col
       >
     </el-row>
     <el-row class="row row2">
       <el-col :span="24"
-        ><span class="left">项目:</span
+        ><span class="left" prop="neme">项目:{{}}</span
         ><span class="right">
           应付金额￥<em class="money">22</em>
         </span></el-col
@@ -63,7 +65,9 @@
               <span class="right"> 支付￥<em class="money">22</em> </span>
               <div>
                 <a href="/detail" class="cart">返回修改订单</a>
-                <el-button type="warning" round class="goPay" @click="alipay">去付款</el-button>
+                <el-button type="warning" round class="goPay" @click="alipay"
+                  >去付款</el-button
+                >
               </div>
             </div>
           </el-tab-pane>
@@ -73,22 +77,50 @@
         </el-tabs>
       </el-col>
     </el-row>
+    <scan-pay-code
+      v-if="showPay"
+      @close="closePayModal"
+      :img="payImg"
+    ></scan-pay-code>
   </div>
 </template>
 
 <script>
+import QRCode from "qrcode";
+import ScanPayCode from "@/components/pay/ScanPayCode.vue";
 export default {
+  components: {
+    ScanPayCode
+  },
   data() {
     return {
-      activeName: "first"
+      pay: [],
+      activeName: "first",
+      showPay: false,//是否显示支付宝弹框
+      showPayModal: false, // 是否显示二次支付确认弹框
+      T: '',  // 定时器ID
     };
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
     },
-    alipay(){
-      window.open('/pay?id='+this.id,'_blank')
+    alipay() {
+      this.$axios.get("/alipay/pay").then(res => {
+        let url = res.data.data.alipay_trade_precreate_response.qr_code;
+
+        QRCode.toDataURL(url).then(url => {
+          this.showPay = true;
+          this.payImg = url;
+          // this.loopOrderState();
+        });
+      });
+    },
+    //关闭支付宝弹窗
+    closePayModal() {
+      this.showPay = false;
+      this.showPayModal = true;
+      clearInterval(this.T);
     }
   }
 };
