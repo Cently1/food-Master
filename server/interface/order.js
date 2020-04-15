@@ -20,6 +20,7 @@ router.post("/createOrder", async ctx => {
     let order = new Order({
       id: orderID,
       count,
+      price,
       total: price * count,
       time,
       user: ctx.session.passport.user,

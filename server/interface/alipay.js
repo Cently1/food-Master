@@ -1,5 +1,7 @@
 import Router from "koa-router";
 import axios from "./utils/axios";
+import Cart from "../dbs/models/cart";
+import Order from "../dbs/models/order";
 import AlipayFormData from "alipay-sdk/lib/form";
 
 const AlipaySdk = require("alipay-sdk").default;
@@ -38,6 +40,23 @@ router.get("/pay", async ctx => {
     code: 0,
     data: res1
   };
+});
+//
+router.post("/getPay", async ctx => {
+  let { id } = ctx.request.body;
+  let id1 = id;
+  try {
+    let result = await Order.findOne({ id: id1 });
+    ctx.body = {
+      code: 0,
+      data: result ? result : {}
+    };
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      data: {}
+    };
+  }
 });
 
 export default router;

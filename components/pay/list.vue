@@ -12,11 +12,27 @@
     </el-row>
     <el-row class="row row2">
       <el-col :span="24"
-        ><span class="left" prop="name">项目:{{name}}</span
+        ><span class="left"
+          ><i class="el-icon-check"></i>商品名称:<b>&nbsp;{{ name }}</b></span
         ><span class="right">
-          应付金额￥<em class="money" prop="price">{{price}}</em>
-        </span></el-col
-      >
+          应付金额￥<em class="money" prop="total">{{ total }}</em>
+        </span>
+        <span class="left"
+          ><i class="el-icon-check"></i>商品单价:<b
+            >&nbsp;{{ price }}元</b
+          ></span
+        >
+        <span class="left"
+          ><i class="el-icon-check"></i>商品数量:<b
+            >&nbsp;{{ count }}件</b
+          ></span
+        >
+        <div class="left">
+          <i class="el-icon-check"></i>商品图片:<span class="left1"
+            ><img class="left" :src="imgs" style="width:100px;height:100px;"
+          /></span>
+        </div>
+      </el-col>
     </el-row>
     <el-row class="row row3">
       <el-col>
@@ -62,7 +78,9 @@
               </li>
             </ul>
             <div class="pay">
-              <span class="right"> 支付￥<em class="money" prop="price">{{price}}</em> </span>
+              <span class="right">
+                支付￥<em class="money" prop="total">{{ total }}</em>
+              </span>
               <div>
                 <a href="/detail" class="cart">返回修改订单</a>
                 <el-button type="warning" round class="goPay" @click="alipay"
@@ -103,8 +121,11 @@ export default {
   data() {
     return {
       cartNo: "", //商品id
-      name: "123", //商品名称
-      price: "hhh", //商品价格
+      name: "", //商品名称
+      price: "", //商品单价
+      count: "", //商品数量
+      total: "", //商品总价
+      imgs: "",
       activeName: "first",
       showPay: false, //是否显示支付宝弹框
       showPayModal: false, // 是否显示二次支付确认弹框
@@ -133,18 +154,20 @@ export default {
     getCartDetail: async function() {
       let {
         status,
-        data: { code, id }
-      } = await this.$axios.post("/cart/getCart", {
-        id: this.cartNo,
-        name: this.name,
-        price: this.price
+        data: {
+          code,
+          data: { name, total, price, count, imgs }
+        }
+      } = await this.$axios.post("/alipay/getPay", {
+        id: this.cartNo
       });
       if (status == 200 && code === 0) {
-        console.log("你最棒");
-        
+        this.name = name;
+        this.total = total;
+        this.price = price;
+        this.count = count;
+        this.imgs = imgs[0].url;
       }
-      // this.name = res.name;
-      // this.price = res.price;
     },
     //关闭支付宝弹窗
     closePayModal() {

@@ -24,6 +24,7 @@ router.post("/create", async ctx => {
       user: ctx.session.passport.user,
       detail
     });
+    //保存到数据库
     let result = await cart.save();
     if (result) {
       ctx.body = {

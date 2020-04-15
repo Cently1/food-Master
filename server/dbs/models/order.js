@@ -9,9 +9,13 @@ const Order = new Schema({
     type: String,
     require: true
   },
-  count:{
-    type:Number,
-    require:true
+  price: {
+    type: Number,
+    require: true
+  },
+  count: {
+    type: Number,
+    require: true
   },
   time: {
     type: String,
@@ -25,13 +29,13 @@ const Order = new Schema({
     type: Array,
     require: true
   },
-  name:{
-      type:String,
-      require:true
+  name: {
+    type: String,
+    require: true
   },
-  status:{
-      type:Number,
-      require:true
+  status: {
+    type: Number,
+    require: true
   }
 });
 
