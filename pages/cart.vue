@@ -44,20 +44,22 @@ export default {
     }
   },
   methods: {
+    //发出请求时，创建订单
     submit: async function() {
       let {
         status,
         data: { code, id }
       } = await this.$axios.post("/order/createOrder", {
+        id: this.cartNo,
+        name: this.cart[0].name,
         count: this.cart[0].count,
-        price: this.cart[0].price,
-        id: this.cartNo
+        price: this.cart[0].price
       });
       if (status == 200 && code === 0) {
         this.$alert(`恭喜您，已成功下单，订单号:${id}`, "下单成功", {
           confirmButtonText: "确定",
           callback: action => {
-            location.href = "/pay";
+            location.href = "/pay?id=" + id;
           }
         });
       }
@@ -68,7 +70,7 @@ export default {
       status,
       data: {
         code,
-        data: {imgs, name, price }
+        data: { imgs, name, price }
       }
     } = await ctx.$axios.post("/cart/getCart", {
       id: ctx.query.id

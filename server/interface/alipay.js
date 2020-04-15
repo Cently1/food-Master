@@ -32,12 +32,11 @@ router.get("/pay", async ctx => {
   //
   let res1;
   await axios.get(result).then(res => {
-    res1=res.data;
+    res1 = res.data;
   });
-  console.log(res1);
   ctx.body = {
     code: 0,
-    data:res1
+    data: res1
   };
 });
 

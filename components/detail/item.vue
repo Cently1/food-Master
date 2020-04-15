@@ -48,7 +48,7 @@ export default {
           detail: {
             name: self.meta.name,
             price:  23,
-            imgs:self.meta.photos.length ? self.meta.photos[0].url: "/logo.png"
+            imgs:self.meta.photos
           }
         }
       });      

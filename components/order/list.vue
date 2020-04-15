@@ -21,11 +21,17 @@
       </li>
       <li v-else class="empty">没有订单</li>
     </ul>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="1000"
+    >
+    </el-pagination>
   </div>
 </template>
 
 <script>
-import {Message} from 'element-ui'
+import { Message } from "element-ui";
 export default {
   props: {
     cur: {
@@ -44,7 +50,7 @@ export default {
         id: oID
       });
       if (status === 200 && code === 0) {
-         Message.success('删除成功',{customClass: 'message-logout'});
+        Message.success("删除成功", { customClass: "message-logout" });
       }
       //1.父组件绑定一个事件
       //2.子组件使用$emit的方法发送

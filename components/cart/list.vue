@@ -7,7 +7,7 @@
       v-for="(item, idx) in cartData"
       :key="idx"
     >
-      <img :src="item.imgs" alt="" style="width:150px;height:150px;" />
+      <img :src="item.imgs[0].url" alt="" style="width:150px;height:150px;" />
     </el-table-column>
     <el-table-column label="商品名称" width="232" prop="name" />
     <el-table-column label="单价" width="182" prop="price" />

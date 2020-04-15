@@ -12,9 +12,9 @@
     </el-row>
     <el-row class="row row2">
       <el-col :span="24"
-        ><span class="left" prop="neme">项目:{{}}</span
+        ><span class="left" prop="name">项目:{{name}}</span
         ><span class="right">
-          应付金额￥<em class="money">22</em>
+          应付金额￥<em class="money" prop="price">{{price}}</em>
         </span></el-col
       >
     </el-row>
@@ -62,7 +62,7 @@
               </li>
             </ul>
             <div class="pay">
-              <span class="right"> 支付￥<em class="money">22</em> </span>
+              <span class="right"> 支付￥<em class="money" prop="price">{{price}}</em> </span>
               <div>
                 <a href="/detail" class="cart">返回修改订单</a>
                 <el-button type="warning" round class="goPay" @click="alipay"
@@ -92,14 +92,28 @@ export default {
   components: {
     ScanPayCode
   },
+  props: {
+    pay: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
+  },
   data() {
     return {
-      pay: [],
+      cartNo: "", //商品id
+      name: "123", //商品名称
+      price: "hhh", //商品价格
       activeName: "first",
-      showPay: false,//是否显示支付宝弹框
+      showPay: false, //是否显示支付宝弹框
       showPayModal: false, // 是否显示二次支付确认弹框
-      T: '',  // 定时器ID
+      T: "" // 定时器ID
     };
+  },
+  mounted() {
+    this.cartNo = location.search.substring(4);
+    this.getCartDetail();
   },
   methods: {
     handleClick(tab, event) {
@@ -115,6 +129,22 @@ export default {
           // this.loopOrderState();
         });
       });
+    },
+    getCartDetail: async function() {
+      let {
+        status,
+        data: { code, id }
+      } = await this.$axios.post("/cart/getCart", {
+        id: this.cartNo,
+        name: this.name,
+        price: this.price
+      });
+      if (status == 200 && code === 0) {
+        console.log("你最棒");
+        
+      }
+      // this.name = res.name;
+      // this.price = res.price;
     },
     //关闭支付宝弹窗
     closePayModal() {

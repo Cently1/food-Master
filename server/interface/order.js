@@ -57,7 +57,7 @@ router.post("/getOrders", async ctx => {
     };
   } else {
     try {
-      let result = await Order.find();
+      let result = await Order.find().limit(4);
       if (result) {
         ctx.body = {
           code: 0,
@@ -79,7 +79,7 @@ router.post("/getOrders", async ctx => {
 });
 //删除订单
 router.post("/deleteOrder", async ctx => {
-  const {id}=ctx.request.body
+  const { id } = ctx.request.body;
   const order = await Order.where({
     id: id
   }).remove();
