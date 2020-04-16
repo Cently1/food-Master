@@ -100,15 +100,30 @@
       @close="closePayModal"
       :img="payImg"
     ></scan-pay-code>
+    <PayDialog
+      title="支付确认"
+      btn-type="3"
+      :show-modal="showPayModal"
+      sure-text="查看订单"
+      cancel-text="未支付"
+      @cancel="showPayModal = false"
+      @submit="goOrderList"
+    >
+      <template v-slot:body>
+        <p>您确认是否完成支付？</p>
+      </template>
+    </PayDialog>
   </div>
 </template>
 
 <script>
 import QRCode from "qrcode";
 import ScanPayCode from "@/components/pay/ScanPayCode.vue";
+import PayDialog from "@/components/pay/payDialog.vue";
 export default {
   components: {
-    ScanPayCode
+    ScanPayCode,
+    PayDialog
   },
   props: {
     pay: {
@@ -141,16 +156,19 @@ export default {
       console.log(tab, event);
     },
     alipay() {
-      this.$axios.post(`/alipay/pay?id=${this.cartNo}`,
-       {id: this.cartNo,name:this.name}
-      ).then(res => {
-        let url = res.data.data.alipay_trade_precreate_response.qr_code;
-        QRCode.toDataURL(url).then(url => {
-          this.showPay = true;
-          this.payImg = url;
-          // this.loopOrderState();
+      this.$axios
+        .post(`/alipay/pay?id=${this.cartNo}`, {
+          id: this.cartNo,
+          name: this.name
+        })
+        .then(res => {
+          let url = res.data.data.alipay_trade_precreate_response.qr_code;
+          QRCode.toDataURL(url).then(url => {
+            this.showPay = true;
+            this.payImg = url;
+            this.loopOrderState();
+          });
         });
-      });
     },
     getCartDetail: async function() {
       let {
@@ -175,6 +193,25 @@ export default {
       this.showPay = false;
       this.showPayModal = true;
       clearInterval(this.T);
+    },
+    //轮循当前订单支付状况
+    loopOrderState() {
+      this.T = setInterval(() => {
+        this.$axios
+          .post("/alipay/orderStatus", {
+            id: this.cartNo
+          })
+          .then(res => {
+            if (res.data.code === 0) {
+              clearInterval(this.T);
+              this.goOrderList();
+            }
+          });
+      }, 1000);
+    },
+    //支付完成之后进入到订单列表页
+    goOrderList() {
+      window.location.href = "/order";
     }
   }
 };

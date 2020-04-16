@@ -1,10 +1,10 @@
 <template>
   <div class="search-panel">
     <el-row class="m-header-searchbar">
-      <el-col :span="3" class="left">
+      <el-col :span="3" class="left" style="padding-top:0px;">
         <img
-          src="//s0.meituan.net/bs/fe-web-meituan/fa5f0f0/img/logo.png"
-          alt="食达人"
+          src="https://halen-blog-1252760404.cos.ap-chengdu.myqcloud.com/img/20200416111807.png"
+          alt="食达人" style="width:250px;height:105px;"
         />
       </el-col>
       <el-col :span="15" class="center">

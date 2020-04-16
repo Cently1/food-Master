@@ -32,6 +32,9 @@
           <el-tab-pane label="待付款" name="unpay"
             ><list :cur="cur" @refresh="refresh"
           /></el-tab-pane>
+          <el-tab-pane label="已付款" name="pay"
+            ><list :cur="cur" @refresh="refresh"
+          /></el-tab-pane>
           <el-tab-pane label="待使用" name="unuse"
             ><list :cur="cur"
           /></el-tab-pane>
@@ -62,6 +65,8 @@ export default {
       this.cur = this.list.filter(item => {
         if (val === "unpay") {
           return item.status === 0;
+        } else if (val === "pay") {
+          return item.status === 1;
         } else if (val === "all") {
           return true;
         } else {
@@ -74,6 +79,8 @@ export default {
       this.cur = this.list.filter(item => {
         if (val === "unpay") {
           return item.status === 0;
+        } else if (val === "pay") {
+          return item.status === 1;
         } else if (val === "all") {
           return true;
         } else {
@@ -105,7 +112,12 @@ export default {
               count: item.count,
               total: item.total,
               status: item.status,
-              statusTxt: item.status === 0 ? "待付款" : "已付款"
+              statusTxt:
+                item.status === 0
+                  ? "待付款"
+                  : item.status === 1
+                  ? "已付款"
+                  : "待付款"
             };
           });
         } else {

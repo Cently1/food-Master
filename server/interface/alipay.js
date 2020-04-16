@@ -14,7 +14,7 @@ const alipaySdk = new AlipaySdk({
 });
 
 let router = new Router({ prefix: "/alipay" });
-//返回支付链接
+//返回支付二维码链接
 router.post("/pay", async ctx => {
   let { id, name } = ctx.request.body;
 
@@ -42,7 +42,8 @@ router.post("/pay", async ctx => {
     data: res1
   };
 });
-//
+
+//获取支付页面信息
 router.post("/getPay", async ctx => {
   let { id } = ctx.request.body;
   let id1 = id;
@@ -56,6 +57,36 @@ router.post("/getPay", async ctx => {
     ctx.body = {
       code: -1,
       data: {}
+    };
+  }
+});
+
+//获取订单状态
+router.post("/orderStatus", async ctx => {
+  let { id } = ctx.request.body;
+
+  const formData = new AlipayFormData();
+  formData.setMethod("get");
+  formData.addField("bizContent", {
+    out_trade_no: id //商品订单号
+  });
+  const result = await alipaySdk.exec(
+    "alipay.trade.query",
+    {},
+    { formData: formData }
+  );
+  let res1;
+  await axios.get(result).then(res => {
+    res1 = res.data;
+  });
+  let status = res1.alipay_trade_query_response.trade_status || "FAILED";
+  if ("TRADE_SUCCESS" == status) {
+    ctx.body = {
+      code: 0
+    };
+  }else{
+    ctx.body = {
+      code: 1
     };
   }
 });
