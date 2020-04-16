@@ -141,9 +141,10 @@ export default {
       console.log(tab, event);
     },
     alipay() {
-      this.$axios.get("/alipay/pay").then(res => {
+      this.$axios.post(`/alipay/pay?id=${this.cartNo}`,
+       {id: this.cartNo,name:this.name}
+      ).then(res => {
         let url = res.data.data.alipay_trade_precreate_response.qr_code;
-
         QRCode.toDataURL(url).then(url => {
           this.showPay = true;
           this.payImg = url;

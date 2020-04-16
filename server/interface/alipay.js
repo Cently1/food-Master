@@ -15,23 +15,24 @@ const alipaySdk = new AlipaySdk({
 
 let router = new Router({ prefix: "/alipay" });
 //返回支付链接
-router.get("/pay", async ctx => {
+router.post("/pay", async ctx => {
+  let { id, name } = ctx.request.body;
+
   const formData = new AlipayFormData();
   formData.setMethod("get");
   formData.addField("notifyUrl", "http://www.123.com/notify");
   formData.addField("bizContent", {
-    outTradeNo: "0125465145263",
+    outTradeNo: id, //商品id
     productCode: "FACE_TO_FACE_PAYMENT",
     totalAmount: "0.01",
-    subject: "商品1",
-    body: "商品详情1"
+    subject: name, //商品名称
+    body: "商品详情"
   });
   const result = await alipaySdk.exec(
     "alipay.trade.precreate",
     {},
     { formData: formData }
   );
-  //
   let res1;
   await axios.get(result).then(res => {
     res1 = res.data;
