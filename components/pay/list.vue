@@ -205,7 +205,7 @@ export default {
             if (res.data.code === 0) {
               clearInterval(this.T);
               this.updateOrderList();
-              //this.goOrderList();
+              this.goOrderList();
             }
           });
       }, 1000);
