@@ -58,7 +58,7 @@ router.post("/getOrders", async ctx => {
     };
   } else {
     try {
-      let result = await Order.find().limit(4);
+      let result = await Order.find();
       if (result) {
         ctx.body = {
           code: 0,

@@ -2,7 +2,7 @@
   <div class="m-order">
     <ul>
       <li v-if="cur.length">
-        <el-row v-for="(item, idx) in cur" :key="idx">
+        <el-row v-for="(item, idx) in frontEndPageChange" :key="idx">
           <el-col :span="4">
             <img :src="item.img" alt="" />
           </el-col>
@@ -22,23 +22,55 @@
       <li v-else class="empty">没有订单</li>
     </ul>
     <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handlePageChange"
+      :current-page="paginationOptions.currentPage"
+      :page-size="paginationOptions.pageSize"
+      :page-sizes="paginationOptions.pageSizes"
       background
       layout="prev, pager, next"
-      :total="1000"
+      :total="this.cur.length"
     >
     </el-pagination>
   </div>
 </template>
 
 <script>
-import { Message } from "element-ui";
+import { Message, Pagination } from "element-ui";
 export default {
+  data() {
+    return {
+      paginationOptions: {
+        currentPage: 1, //当前页
+        pageSize: 4, //展示页数
+        pageSizes: [4, 8, 12,16], //可选择展示页数 数组
+        count: this.cur.length
+      }
+    };
+  },
   props: {
     cur: {
       type: Array,
       default: () => {
         return [];
       }
+    }
+  },
+  //计算属性对数据进行处理
+  computed: {
+    frontEndPageChange() {
+      let start =
+        (this.paginationOptions.currentPage - 1) *
+        this.paginationOptions.pageSize;
+      if (start >= this.count) {
+        start = 0;
+      }
+      let end =
+        this.paginationOptions.currentPage * this.paginationOptions.pageSize;
+      if (end >= this.count) {
+        end = this.count;
+      }
+      return this.cur.slice(start, end);
     }
   },
   methods: {
@@ -57,6 +89,14 @@ export default {
       //3.父组件的函数里面接收子组件传递的值
       let flag = false;
       this.$emit("refresh", oID);
+    },
+    //改变分页数量
+    handleSizeChange(val) {
+      this.paginationOptions.pageSize = val;
+    },
+    //改变当前分页
+    handlePageChange(val) {
+      this.paginationOptions.currentPage = val;
     }
   }
 };
