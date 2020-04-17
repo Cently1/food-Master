@@ -204,10 +204,27 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               clearInterval(this.T);
-              this.goOrderList();
+              this.updateOrderList();
+              //this.goOrderList();
             }
           });
       }, 1000);
+    },
+
+    //支付完成之前需要更新订单的状态
+    updateOrderList: async function() {
+      let status,data,code 
+       await this.$axios.post("/order/updateOrder", {
+        id: this.cartNo,
+        status: "1"
+      }).then(res=>{
+        status=res.status,
+        data= res.data,
+        code= res.data.code
+      })
+      if (status === 200 && code === 0) {
+        console.log("更新成功");
+      }
     },
     //支付完成之后进入到订单列表页
     goOrderList() {

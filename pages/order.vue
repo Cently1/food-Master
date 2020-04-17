@@ -111,7 +111,7 @@ export default {
               name: item.name,
               count: item.count,
               total: item.total,
-              status: item.status,
+              status: item.status,//status为0未付款，为1已付款
               statusTxt:
                 item.status === 0
                   ? "待付款"
@@ -141,7 +141,12 @@ export default {
             count: item.count,
             total: item.total,
             status: item.status,
-            statusTxt: item.status === 0 ? "待付款" : "已付款"
+            statusTxt:
+              item.status === 0
+                ? "待付款"
+                : item.status === 1
+                ? "已付款"
+                : "待付款"
           };
         }),
         cur: list.map(item => {
@@ -152,7 +157,12 @@ export default {
             count: item.count,
             total: item.total,
             status: item.status,
-            statusTxt: item.status === 0 ? "待付款" : "已付款"
+            statusTxt:
+              item.status === 0
+                ? "待付款"
+                : item.status === 1
+                ? "已付款"
+                : "待付款"
           };
         })
       };

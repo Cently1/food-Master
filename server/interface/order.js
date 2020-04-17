@@ -94,4 +94,24 @@ router.post("/deleteOrder", async ctx => {
     };
   }
 });
+
+//更新订单
+router.post("/updateOrder", async ctx => {
+   let { id, status} = ctx.request.body;
+  const updateOrder = await Order.where({
+    id: id
+  }).update({
+    status: status
+  });
+  if (updateOrder) {
+    ctx.body = {
+      code: 0
+    };
+  } else {
+    ctx.body = {
+      code: -1
+    };
+  }
+});
+
 export default router;
