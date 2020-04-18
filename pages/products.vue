@@ -6,7 +6,7 @@
       <list :list="list" />
     </el-col>
     <el-col :sapn="5">
-      <amap v-if="point.length" :width="230" :height="290" :point="point" />
+      <amap v-if="point.length" :width="230" :height="345" :point="point" />
     </el-col>
   </el-row>
 </template>

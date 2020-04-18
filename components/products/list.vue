@@ -5,7 +5,7 @@
         v-for="item in nav"
         :key="item.name"
         :class="[item.name, item.active ? 's-nav-active' : '']"
-        @click="navSelect"
+        @click="navSelect(item.name)"
       >
         {{ item.txt }}
       </dd>
@@ -56,14 +56,35 @@ export default {
       ]
     };
   },
-  async asyncData({app}){
-      let {data}=await app.$axios.get('searchList')
-      return {item:data.list}
+  async asyncData({ app }) {
+    let { data } = await app.$axios.get("searchList");
+    return { item: data.list };
   },
-  methods:{
-      navSelect:function () {
-          console.log('select');
+  //实现智能排序的功能
+  methods: {
+    navSelect: function(itemname) {
+      if (itemname === "s-default") {       //默认排序
+        this.list = this.list.sort((a, b) => {
+          return b.default - a.default;
+        });
       }
+      if (itemname === "s-visit") {       //评论
+        this.list = this.list.sort((a, b) => {
+          return b.comment - a.comment;
+        });
+      }
+      if (itemname === "s-comment") {     //评分
+        this.list = this.list.sort((a, b) => {
+          return b.rate - a.rate;
+        });
+      }
+      if (itemname === "s-price") {       //价格
+        this.list = this.list.sort((a, b) => {
+          return b.price - a.price;
+        });
+      }
+      console.log("select", itemname);
+    }
   }
 };
 </script>

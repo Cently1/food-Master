@@ -1,7 +1,11 @@
 <template>
   <div
     :id="id"
-    :style="{ width: width + 'px', height: height + 'px', margin: '34px auto' }"
+    :style="{
+      width: width + 'px',
+      height: height + 'px',
+      margin: '34px 20px auto'
+    }"
     class="m-map"
   ></div>
 </template>
@@ -20,7 +24,7 @@ export default {
     point: {
       type: Array,
       default() {
-        return [114.3, 30.6];
+        return [114.3, 30.6]; //默认值是武汉的经纬度
       }
     }
   },
@@ -38,8 +42,7 @@ export default {
   },
   mounted() {
     let self = this;
-    self.id = `map${Math
-      .random()
+    self.id = `map${Math.random()
       .toString()
       .slice(4, 6)}`;
     window.onmapLoaded = () => {
