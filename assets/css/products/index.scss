@@ -136,7 +136,8 @@
         cursor: pointer;
 
         &.s-nav-active {
-          color: #31bcad;
+          color: #fe6428;
+          font-weight: bold;
         }
       }
 
@@ -190,7 +191,7 @@
 
       &:nth-child(2) {
         border-radius: 100px;
-        background: #13d1be;
+        background: #ff6e32;
         color: #fff;
         height: 22px;
         line-height: 22px;

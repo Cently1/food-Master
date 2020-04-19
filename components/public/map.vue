@@ -7,12 +7,19 @@
       margin: '34px 20px auto'
     }"
     class="m-map"
+    :class="BarFixed == true ? 'isFixed' : ''"
   ></div>
 </template>
 
 <script>
 export default {
   props: {
+    BarFixed: {
+      type: Boolean,
+      default() {
+        return false;
+      }
+    },
     width: {
       type: Number,
       default: 300
@@ -38,6 +45,8 @@ export default {
     point: function(val, old) {
       this.map.setCenter(val);
       this.marker.setPosition(val);
+      console.log("地址更新了");
+      //更新每个点的标记位置
     }
   },
   mounted() {
@@ -45,6 +54,7 @@ export default {
     self.id = `map${Math.random()
       .toString()
       .slice(4, 6)}`;
+    //异步加载地图
     window.onmapLoaded = () => {
       let map = new window.AMap.Map(self.id, {
         resizeEnable: true,
@@ -52,9 +62,11 @@ export default {
         center: self.point
       });
       self.map = map;
+      //滚动条
       window.AMap.plugin("AMap.ToolBar", () => {
         let toolbar = new window.AMap.ToolBar();
         map.addControl(toolbar);
+        // map.addControl(new AMap.OverView({ isOpen: true }));
         let marker = new window.AMap.Marker({
           icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
           position: self.point
@@ -72,4 +84,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.isFixed {
+  position: fixed !important;
+  top: 0;
+  margin-top: 0px !important;
+  margin-left: 10px !important;
+}
+</style>
