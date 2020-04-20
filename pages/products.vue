@@ -11,6 +11,7 @@
         :width="230"
         :height="345"
         :point="point"
+        :titleName="titleName"
         :BarFixed="BarFixed"
       />
     </el-col>
@@ -36,6 +37,7 @@ export default {
       types: [],
       areas: [],
       keyword: "",
+      titleName: "",
       point: [], //地图坐标
       BarFixed: false, //滚动时地图添加动态class
       sunHeight: 0 //列表高度
@@ -92,7 +94,7 @@ export default {
   //使用forEach来循环遍历每个列表索引值和坐标
   mounted() {
     //this.$store.commit("product/getProduct", this.list);
-    
+
     //列表高度
     this.$nextTick(() => {
       let itemCollection = document.querySelectorAll(".s-item");
@@ -128,6 +130,7 @@ export default {
           scrollTop < offsetTop + 172 * item.location.length
         ) {
           self.point = item.location.split(",");
+          self.titleName = item.name;
           console.log("坐标", self.point);
         }
       });
