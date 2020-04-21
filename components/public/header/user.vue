@@ -4,6 +4,7 @@
       <span class="username">欢迎您,{{ user }}</span> <nuxt-link to="/exit"
       >&nbsp;&nbsp;&nbsp;[退出]</nuxt-link
       >
+      <img src="" alt="">
     </template>
     <template v-else>
       <nuxt-link to="/login" class="login">立即登录 </nuxt-link>

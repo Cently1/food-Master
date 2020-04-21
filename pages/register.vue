@@ -71,9 +71,12 @@
 
 <script>
 import CryptoJS from "crypto-js";
+import { Message, Pagination } from "element-ui";
+
 export default {
   data() {
     return {
+      status:true,
       statusMsg: "",
       error: "",
       ruleForm: {
@@ -135,7 +138,7 @@ export default {
       const self = this;
       let namePass;
       let emailPass;
-      if (self.timerid) {
+      if (!self.status) {
         return false;
       }
       this.$refs["ruleForm"].validateField("name", valid => {
@@ -157,12 +160,14 @@ export default {
           })
           .then(({ status, data }) => {
             if (status === 200 && data && data.code === 0) {
+              self.status = false;
               let count = 60;
               self.statusMsg = `验证码已发送，剩余${--count}秒`;
               self.timerid = setInterval(function() {
                 self.statusMsg = `验证码已发送,剩余${--count}秒`;
                 if (count === 0) {
                   clearInterval(self.timerid);
+                  self.status = true;
                   self.statusMsg = "";
                 }
               }, 1000);
@@ -186,6 +191,10 @@ export default {
             .then(({ status, data }) => {
               if (status === 200) {
                 if (data && data.code === 0) {
+                  Message.success("注册成功", {
+                    customClass: "message-logout"
+                  });
+
                   location.href = "/login";
                 } else {
                   self.error = data.msg;
