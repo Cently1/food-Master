@@ -39,6 +39,7 @@
     }
   }
   .m-user {
+    position: relative;
     .username {
       color: blue;
       cursor: pointer;
@@ -51,6 +52,15 @@
       &:hover {
         color: gold;
       }
+    }
+    .icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-top: 3px;
+      position: absolute;
+      top: 0px;
+      left: 140px;
     }
   }
   .m-nav {
@@ -69,20 +79,20 @@
         text-align: center;
         cursor: pointer;
         a {
-          color:gray;
+          color: gray;
 
           &:hover {
-          color:#fe6428;
+            color: #fe6428;
           }
         }
         .my,
         .app,
         .center,
         .order,
-        .site{
-          color:white;
-          &:hover{
-            color:blue;
+        .site {
+          color: white;
+          &:hover {
+            color: blue;
           }
         }
         &.list:hover {
@@ -181,8 +191,8 @@
               width: 78px;
               display: inline-block;
               text-align: center;
-              &:hover{
-                color:#fe6428;
+              &:hover {
+                color: #fe6428;
               }
             }
 
