@@ -13,6 +13,16 @@
         </header>
       </article>
       <section>
+        <div class="banner">
+          <a href="/" class="logo" />
+          <img
+            src="https://halen-blog-1252760404.cos.ap-chengdu.myqcloud.com/img/20200326225744.png"
+            width="500"
+            height="370"
+            alt="食达人"
+            class="img-logo"
+          />
+        </div>
         <el-form
           :model="ruleForm"
           :rules="rules"
@@ -20,6 +30,7 @@
           label-width="100px"
           class="demo-ruleForm"
         >
+          <span class="userRegister">用户注册</span>
           <el-form-item label="昵称" prop="name">
             <el-input v-model="ruleForm.name"></el-input>
           </el-form-item>
@@ -46,7 +57,10 @@
               class="f1"
               href="https://rules-center.meituan.com/rules-detail/4"
               target="_blank"
-              >《食达人点评用户服务协议》</a
+              ><input
+                type="checkbox"
+                checked="checked"
+              />《食达人点评用户服务协议》</a
             >
           </el-form-item>
         </el-form>
@@ -149,7 +163,7 @@ export default {
                 self.statusMsg = `验证码已发送,剩余${--count}秒`;
                 if (count === 0) {
                   clearInterval(self.timerid);
-                  self.statusMsg='';
+                  self.statusMsg = "";
                 }
               }, 1000);
             } else {

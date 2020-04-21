@@ -17,9 +17,9 @@ body {
             display: inline-block;
             // width: 128px;
             width: 250px;
-            height: 70px;
+            height: 77px;
             text-indent: -9999px;
-            background-position: -738px -718px;
+            background-position: -738px -710px;
             background-image: url(https://halen-blog-1252760404.cos.ap-chengdu.myqcloud.com/img/20200416192139.png);
           }
 
@@ -32,12 +32,13 @@ body {
           }
         }
         .el-button--small {
-          background: #2ecc71;
-          border-color: none;
+          background: #fe6428;
+          border: none;
+          outline: none;
         }
-        span{
-          color:white;
-          font-size:14px;
+        span {
+          color: white;
+          font-size: 14px;
         }
         .bold {
           color: white;
@@ -68,8 +69,8 @@ body {
         .el-button--primary {
           width: 250px;
           height: 45px;
-          background: #2ecc71;
-          border-color: #2ecc71;
+          background: #fe6428;
+          border-color: #fe6428;
           &:hover {
             background-image: linear-gradient(
               transparent,
@@ -83,8 +84,17 @@ body {
         border-radius: 15px 15px 15px 15px;
         background-color: #ecf0f1;
         position: absolute;
-        left: 250px;
+        left: 550px;
         top: 100px;
+        .userRegister {
+          color: #fe6428;
+          line-height: 70px;
+          font-size: 24px;
+          margin-top: 50px;
+          font-weight: bold;
+          text-align: center;
+          margin-left: 179px;
+        }
       }
       .el-form-item__content {
         margin-right: 40px;
@@ -97,9 +107,12 @@ body {
         margin-top: 10px;
       }
       .f1 {
-        font-size: 12px;
-        font-weight: bold;
-        margin-left: 45px;
+        font-size: 14px;
+        color: #fe6428;
+        margin-left: 35px;
+      }
+      .el-input1 {
+        margin-top: 0px !important;
       }
     }
   }
