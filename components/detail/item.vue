@@ -18,7 +18,7 @@
         </p>
       </dd>
       <dd>
-        <el-button type="warning" round @click="createCart">立即抢购</el-button>
+        <el-button type="warning" round @click="createCart">立即购买</el-button>
       </dd>
     </dl>
   </li>

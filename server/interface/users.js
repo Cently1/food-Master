@@ -86,6 +86,8 @@ router.post("/signup", async ctx => {
 
 //登录接口
 router.post("/signin", async (ctx, next) => {
+  //Passport.authenticate是Node的的一个中间件
+  //调用utils里面的Passport(包含表单序列化和反序列化,查询数据库)
   return Passport.authenticate("local", function(err, user, info, status) {
     if (err) {
       ctx.body = {

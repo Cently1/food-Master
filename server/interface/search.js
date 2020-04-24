@@ -53,6 +53,7 @@ router.get("/products", async ctx => {
     ctx.body = {
       product,
       more: ctx.isAuthenticated() ? more : [],
+      //isAuthenticated检测用户登录状态
       login: ctx.isAuthenticated()
     };
   } else {

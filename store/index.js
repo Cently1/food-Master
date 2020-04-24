@@ -21,6 +21,8 @@ const store = () =>
           "geo/setPosition",
           status === 200 ? { city, province } : { city: "", province: "" }
         );
+        console.log('我是最棒的');
+        
         const {
           status: status2,
           data: { menu }

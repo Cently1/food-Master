@@ -7,9 +7,11 @@
       </dd>
     </dl>
     <dl v-for="item in block" :key="item.title" class="m-categroy-section">
-      <dt :id="'city-' + item.title">{{item.title}}</dt>
+      <dt :id="'city-' + item.title">{{ item.title }}</dt>
       <dd>
-        <span v-for="c in item.city" :key="c">{{ c }}</span>
+        <span v-for="c in item.city" :key="c" @click="handlePinyin($event)">{{
+          c
+        }}</span>
       </dd>
     </dl>
   </div>
@@ -56,6 +58,14 @@ export default {
       }
       blocks.sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0));
       self.block = blocks;
+    }
+  },
+  methods: {
+    handlePinyin: async function(e) {
+      //e.target是用来得到当前点击的元素,innerHTML得到当前元素的内容
+      let text = e.target.innerHTML;
+      this.$store.commit("geo/setPosition", { city: text });
+      location.href = "/";
     }
   }
 };

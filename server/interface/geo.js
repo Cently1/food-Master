@@ -38,9 +38,7 @@ router.get("/province/:id", async ctx => {
   let {
     status,
     data: { city }
-  } = await axios.get(
-    `http://cp-tools.cn/geo/province/${ctx.params.id}`
-  );
+  } = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}`);
   if (status === 200) {
     ctx.body = {
       city
@@ -53,6 +51,23 @@ router.get("/province/:id", async ctx => {
 });
 //获取所有的城市列表
 router.get("/city", async ctx => {
+  // let city = []
+  // let result = await City.find()
+  // result.forEach(item => {
+  //   city = city.concat(item.value)
+  // })
+  // ctx.body = {
+  //   code: 0,
+  //   city: city.map(item => {
+  //     return {
+  //       province: item.province,
+  //       id: item.id,
+  //       name: item.name === '市辖区' || item.name === '省直辖县级行政区划'
+  //         ? item.province
+  //         : item.name
+  //     }
+  //   })
+  // }
   let {
     status,
     data: { city }

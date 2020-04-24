@@ -4,7 +4,8 @@
       <el-col :span="3" class="left" style="padding-top:0px;">
         <img
           src="https://halen-blog-1252760404.cos.ap-chengdu.myqcloud.com/img/20200416111807.png"
-          alt="食达人" style="width:250px;height:105px;"
+          alt="食达人"
+          style="width:250px;height:105px;"
         />
       </el-col>
       <el-col :span="15" class="center">
@@ -46,7 +47,7 @@
             >{{ item.name }}</a
           >
         </p>
-        <ul class="nav">
+        <!-- <ul class="nav">
           <li>
             <nuxt-link to="/" class="takeout">达人外卖</nuxt-link>
           </li>
@@ -62,7 +63,7 @@
           <li>
             <nuxt-link to="/" class="business">加入达人</nuxt-link>
           </li>
-        </ul>
+        </ul> -->
       </el-col>
       <el-col :span="6" class="right">
         <ul class="security">
