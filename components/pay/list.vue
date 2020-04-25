@@ -70,7 +70,8 @@
                   ><img
                     src="https://p1.meituan.net/pay/pc_wxqrpay.png"
                     disabled=""
-                    alt="微信"/></label
+                    alt="微信"
+                    @click="Wechat"/></label
                 ><span
                   class="payment-weak-tip"
                   style="visibility: hidden;"
@@ -120,6 +121,7 @@
 import QRCode from "qrcode";
 import ScanPayCode from "@/components/pay/ScanPayCode.vue";
 import PayDialog from "@/components/pay/payDialog.vue";
+import { MessageBox } from "element-ui";
 export default {
   components: {
     ScanPayCode,
@@ -152,6 +154,9 @@ export default {
     this.getCartDetail();
   },
   methods: {
+    Wechat() {
+      alert("暂不支持该服务")
+    },
     handleClick(tab, event) {
       console.log(tab, event);
     },
@@ -213,15 +218,15 @@ export default {
 
     //支付完成之前需要更新订单的状态
     updateOrderList: async function() {
-      let status,data,code 
-       await this.$axios.post("/order/updateOrder", {
-        id: this.cartNo,
-        status: "1"
-      }).then(res=>{
-        status=res.status,
-        data= res.data,
-        code= res.data.code
-      })
+      let status, data, code;
+      await this.$axios
+        .post("/order/updateOrder", {
+          id: this.cartNo,
+          status: "1"
+        })
+        .then(res => {
+          (status = res.status), (data = res.data), (code = res.data.code);
+        });
       if (status === 200 && code === 0) {
         console.log("更新成功");
       }

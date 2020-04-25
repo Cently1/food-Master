@@ -33,7 +33,9 @@
     "nuxt": "^2.0.0",
     "passport-local": "^1.0.0",
     "qrcode": "^1.4.4",
-    "sass": "^1.26.3"
+    "sass": "^1.26.3",
+    "swiper": "^5.3.8",
+    "vue-awesome-swiper": "^4.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",

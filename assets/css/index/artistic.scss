@@ -1,12 +1,20 @@
 .m-istyle {
   width: 1190px;
   margin-top: 40px;
-
+  h3 {
+    font-size: 24px;
+    text-align: center;
+    margin:15px auto;
+  }
   dl {
     height: 44px;
     line-height: 44px;
     background-color: rgb(254, 183, 215);
-    background-image: linear-gradient(to right, rgb(74, 183, 215) 3%, rgb(254, 108, 173) 100%);
+    background-image: linear-gradient(
+      to right,
+      rgb(74, 83, 215) 3%,
+      rgb(154, 208,73) 100%
+    );
     display: flex;
     box-sizing: border-box;
     font-size: 14px;
@@ -62,14 +70,14 @@
     border-right: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
 
-    >li {
+    > li {
       width: 33.3%;
       height: 314px;
       padding: 10px;
       box-sizing: border-box;
       float: left;
       background: #fff;
-      transition: background-color .5s;
+      transition: background-color 0.5s;
       height: 314px;
 
       .el-card {
@@ -122,21 +130,21 @@
               overflow: hidden;
               margin-bottom: 10px;
               font-size: 14px;
-              color: #BE9E4D;
+              color: #be9e4d;
               font-weight: 500;
 
               em {
                 font-size: 22px;
-                color: #BE9E4D;
+                color: #be9e4d;
                 margin-right: 6px;
-                letter-spacing: -.8px;
+                letter-spacing: -0.8px;
                 cursor: pointer;
                 font-style: normal;
               }
 
               span {
                 font-size: 12px;
-                letter-spacing: -.6px;
+                letter-spacing: -0.6px;
               }
             }
           }
@@ -144,8 +152,8 @@
       }
 
       &:hover {
-        background: #F4F4F4;
-        transition: background-color .5s;
+        background: #f4f4f4;
+        transition: background-color 0.5s;
         border-radius: 4px;
       }
     }

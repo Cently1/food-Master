@@ -71,6 +71,7 @@
                 >榛果民宿</a
               >
             </dd>
+            
           </dl>
         </div>
         <div class="footer-column">
@@ -146,6 +147,7 @@
         <div class="footer-column">
           <dt>
             <a rel="nofollow" href="/" class="enter">商家自助入驻入口</a>
+              <img src='https://halen-blog-1252760404.cos.ap-chengdu.myqcloud.com/img/20200416192139.png' style='margin-top:15px;'/>
           </dt>
         </div>
       </div>

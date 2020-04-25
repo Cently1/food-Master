@@ -1,47 +1,109 @@
 <template>
-  <div class="slide">
-    <el-carousel :interval="5000" arrow="always" height="300px">
-      <el-carousel-item v-for="item in list" :key="item.img">
-        <img :src="item.img" />
-      </el-carousel-item>
-    </el-carousel>
+  <div class="swiper-container">
+    <div class="swiper-box">
+      <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            v-for="(item, index) in sliderList"
+            :key="index"
+          >
+            <a href="/"><img :src="item.img" alt=""/></a>
+          </div>
+          <!-- Optional controls -->
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
-  data: () => {
+  data() {
     return {
-      list: [
-        {
-          url: "#abc",
-          img:
-            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3358993419,2327730080&fm=26&gp=0.jpg"
+      swiperOption: {
+        autoplay: true,
+        loop: true,
+        effect: "cube",
+        cubeEffect: {
+          slideShadows: true,
+          shadow: true,
+          shadowOffset: 100,
+          shadowScale: 0.6
         },
-        {
-          url: "#bsbsb",
-          img:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4062886480,1318620483&fm=26&gp=0.jpg"
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
         },
-        {
-          url: "#sjfkajfj",
-          img:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3904580852,2785727384&fm=26&gp=0.jpg"
-        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      },
+      sliderList: [
         {
           url: "#sjfkajfja",
           img:
-            "http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg"
+            "https://i3.meishichina.com/attachment/magic/2020/04/13/2020041315867448189338197577.jpg"
         },
         {
           url: "#kjljj",
           img:
-            "http://p1.meituan.net/codeman/bb0abb3435a60c44d87e90ed4237b61039329.jpg"
+            "https://i3.meishichina.com/attachment/magic/2020/04/07/2020040715862270271858197577.jpg"
+        },
+        {
+          url: "#sjfkajfja",
+          img:
+            "https://i3.meishichina.com/attachment/magic/2020/03/19/2020031915845832443168197577.jpg"
+        },
+        {
+          url: "#kjljj",
+          img:
+            "https://i3.meishichina.com/attachment/magic/2020/02/27/2020022715827848201138197577.jpg"
+        },
+        {
+          url: "#kjljj",
+          img:
+            "https://i3.meishichina.com/attachment/magic/2020/03/10/2020031015838279888678197577.jpg"
+        },
+        {
+          url: "#kjljj",
+          img:
+            "https://i3.meishichina.com/attachment/magic/2020/04/23/2020042315876364213708197577.jpg"
         }
       ]
     };
-  }
+  },
+  components: { swiper, swiperSlide }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.swiper-container {
+  margin-top: 3px;
+  width: 1190px;
+  height: 466px;
+  .swiper-button-prev {
+    left: 274px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    // display:none;
+  }
+  .swiper-pagination {
+    bottom: 10px;
+    left: 600px;
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      margin: 0px 5px;
+    }
+  }
+}
+</style>
