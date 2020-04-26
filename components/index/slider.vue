@@ -1,29 +1,27 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-box">
-      <div v-swiper:mySwiper="swiperOption">
-        <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            v-for="(item, index) in sliderList"
-            :key="index"
-          >
-            <a href="/"><img :src="item.img" alt=""/></a>
-          </div>
+      <no-ssr>
+        <swiper :options="swiperOption" class="swiper">
+          <swiper-slide v-for="(item, index) in sliderList" :key="index">
+            <a><img :src="item.img" alt=""
+            /></a>
+          </swiper-slide>
           <!-- Optional controls -->
           <div class="swiper-pagination" slot="pagination"></div>
           <div class="swiper-button-prev" slot="button-prev"></div>
           <div class="swiper-button-next" slot="button-next"></div>
-        </div>
-      </div>
+        </swiper>
+</no-ssr>
     </div>
   </div>
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+// import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
+
   data() {
     return {
       swiperOption: {
@@ -79,7 +77,7 @@ export default {
       ]
     };
   },
-  components: { swiper, swiperSlide }
+  
 };
 </script>
 
@@ -98,7 +96,7 @@ export default {
   }
   .swiper-pagination {
     bottom: 10px;
-    left: 600px;
+    left: 50px;
     .swiper-pagination-bullet {
       width: 10px;
       height: 10px;
