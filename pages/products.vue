@@ -46,7 +46,9 @@ export default {
   //要测试一下是否进行编码了没有
   async asyncData(ctx) {
     let keyword = ctx.query.keyword;
-    let city = ctx.store.state.geo.position.city;
+    let city = ctx.store.state.geo.position.city.replace('市','');
+    console.log("product",keyword,city);
+    
     let {
       status,
       data: { count, pois }
