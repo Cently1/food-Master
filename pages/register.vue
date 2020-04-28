@@ -126,7 +126,7 @@ export default {
                 callback();
               }
             },
-            trriger: "blur"
+            trigger: "blur"
           }
         ]
       }

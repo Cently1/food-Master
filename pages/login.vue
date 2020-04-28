@@ -68,19 +68,11 @@
         <el-form-item label="验证码" prop="code">
           <el-input v-model="ruleForm.code" maxlength="4" />
         </el-form-item>
-        <el-form-item label="密码" prop="pwd">
-          <el-input
-            v-model="ruleForm.pwd"
-            type="password"
-            class="el-input1"
-          ></el-input>
+        <el-form-item label="新密码" prop="pwd">
+          <el-input v-model="ruleForm.pwd" type="password"></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="cpwd">
-          <el-input
-            v-model="ruleForm.cpwd"
-            type="password"
-            class="el-input1"
-          ></el-input>
+        <el-form-item label="确认新密码" prop="cpwd">
+          <el-input v-model="ruleForm.cpwd" type="password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updatePassword">修改密码</el-button>
@@ -103,14 +95,16 @@
 
 <script>
 import CryptoJS from "crypto-js";
+import { Message, Pagination } from "element-ui";
 export default {
-  data: () => {
+  data(){
     return {
       type: "1", //登录1 忘记密码2
       username: "",
       password: "",
       checked: "",
       error: "",
+      status: true,
       statusMsg: "",
       ruleForm: {
         name: "",
@@ -139,14 +133,14 @@ export default {
         pwd: [
           {
             required: true,
-            message: "创建密码",
+            message: "请输入新密码",
             trigger: "blur"
           }
         ],
         cpwd: [
           {
             required: true,
-            message: "确认密码",
+            message: "再次确认新密码",
             trigger: "blur"
           },
           {
@@ -159,7 +153,7 @@ export default {
                 callback();
               }
             },
-            trriger: "blur"
+            trigger: "blur"
           }
         ]
       }
@@ -167,6 +161,7 @@ export default {
   },
   layout: "blank",
   methods: {
+    //登录
     login: function() {
       let self = this;
       self.$axios
@@ -233,8 +228,40 @@ export default {
           });
       }
     },
-    //更新密码
-    updatePassword: function() {}
+    //更新密码(只需要更新用户表里面的数据)
+    updatePassword: function() {
+      let self = this;
+      this.$refs["ruleForm"].validate(valid => {
+        if (valid) {
+          self.$axios
+            .post("/users/updatePwd", {
+              username: window.encodeURIComponent(self.ruleForm.name),
+              password: CryptoJS.MD5(self.ruleForm.pwd).toString(),
+              email: self.ruleForm.email,
+              code: self.ruleForm.code
+            })
+            .then(({ status, data }) => {
+              if (status === 200) {
+                if (data && data.code === 0) {
+                  Message.success("密码修改成功", {
+                    customClass: "message-logout"
+                  });
+                  location.href = "/login";
+                } else {
+                  self.error = data.msg;
+                }
+              } else {
+                self.error = `服务器出错，错误码:${status}`;
+              }
+              //定时清空错误的信息
+              setInterval(() => {
+                self.error = "";
+              }, 1500);
+            });
+        }
+      });
+    },
+
   }
 };
 </script>

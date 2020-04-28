@@ -84,6 +84,59 @@ router.post("/signup", async ctx => {
   }
 });
 
+//更新密码
+router.post("/updatePwd", async ctx => {
+  //要验证输入的密码和发送的密码是否一致
+  const { code,username } = ctx.request.body;
+  console.log(code);
+  
+  if (code) {
+    const saveCode = await Store.hget(`nodemail:${username}`, "code");
+    const saveExpire = await Store.hget(`nodemail:${username}`, "expire");
+    console.log(code, saveCode, saveExpire, "code,expire");
+    if (code === saveCode) {
+      if (new Date().getTime() - saveExpire > 0) {
+        ctx.body = {
+          code: -1,
+          msg: "验证码已过期，请重新尝试"
+        };
+        return false;
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: "请填写正确的验证码"
+      };
+      return;
+    }
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: "请填写验证码",
+      ddd:'yuyu'
+    };
+    return;
+  }
+  //更新用户密码
+  let { password } = ctx.request.body;
+  const updatePwd = await User.where({
+    username: username
+  }).update({
+    password: password
+  });
+  console.log(updatePwd);
+
+  if (updatePwd) {
+    ctx.body = {
+      code: 0
+    };
+  } else {
+    ctx.body = {
+      code: -1
+    };
+  }
+});
+
 //登录接口
 router.post("/signin", async (ctx, next) => {
   //Passport.authenticate是Node的的一个中间件

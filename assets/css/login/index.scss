@@ -27,6 +27,7 @@
         margin-right: 115px;
         margin-top: 100px;
       }
+      //login begin
       .form {
         display: flex;
         flex-direction: column;
@@ -79,7 +80,7 @@
           margin-left: 20px;
         }
       }
-
+      //login end
       .el-input--prefix {
         margin-top: 30px;
         margin-left: 20px;
@@ -151,7 +152,6 @@
           color: red;
         }
       }
-      //忘记密码
       section {
         margin: 0 auto 30px;
         padding-top: 30px;
@@ -187,6 +187,7 @@
           }
         }
       }
+      //忘记密码
       .demo-ruleForm {
         border-radius: 15px 15px 15px 15px;
         margin-top: 100px;
@@ -194,6 +195,7 @@
         position: absolute;
         left: 1050px;
         top: 100px;
+        width: 25%;
         .userRegister {
           color: #fe6428;
           line-height: 70px;
@@ -203,45 +205,50 @@
           text-align: center;
           margin-left: 179px;
         }
-      }
-      .el-form-item__content {
-        margin-right: 40px;
-        margin-top: 10px;
-      }
-      .el-form-item {
-        margin-bottom: 16px;
-      }
-      .el-form-item__label {
-        margin-top: 10px;
-      }
-      .f1 {
-        font-size: 14px;
-        color: #fe6428;
-        // margin-left: 35px;
-      }
-      .account1 {
-        margin: 20px 5px;
-        color: gray;
-        // text-decoration: underline;
-        text-align: center;
-        &:hover {
-          color: red;
+        .el-form-item__content {
+          margin-right: 40px;
+          margin-top: 10px;
+          .status {
+            font-size: 12px;
+            margin-left: 20px;
+            color: #fe6428;
+          }
         }
-      }
-      .el-button {
-        border-radius: 30px;
-      }
-      .el-button--primary {
-        width: 250px;
-        height: 45px;
-        background: #fe6428;
-        border-color: #fe6428;
-        &:hover {
-          background-image: linear-gradient(
-            transparent,
-            rgba(0, 0, 0, 0.05) 40%,
-            rgba(0, 0, 0, 0.1)
-          );
+        .el-form-item {
+          margin-bottom: 16px;
+        }
+        .el-form-item__label {
+          margin-top: 10px;
+        }
+        .f1 {
+          font-size: 14px;
+          color: #fe6428;
+          // margin-left: 35px;
+        }
+        .account1 {
+          margin: 20px 5px;
+          color: gray;
+          // text-decoration: underline;
+          text-align: center;
+          &:hover {
+            color: red;
+          }
+        }
+        .el-button {
+          border-radius: 30px;
+        }
+        .el-button--primary {
+          width: 250px;
+          height: 45px;
+          background: #fe6428;
+          border-color: #fe6428;
+          &:hover {
+            background-image: linear-gradient(
+              transparent,
+              rgba(0, 0, 0, 0.05) 40%,
+              rgba(0, 0, 0, 0.1)
+            );
+          }
         }
       }
     }
