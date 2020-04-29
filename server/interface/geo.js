@@ -1,7 +1,8 @@
 import Router from "koa-router";
 import axios from "./utils/axios";
 import Menu from "../dbs/models/menu";
-
+import Province from "../dbs/models/province";
+import City from "../dbs/models/city";
 
 let router = new Router({
   prefix: "/geo"

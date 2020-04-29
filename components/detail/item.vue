@@ -47,7 +47,7 @@ export default {
             .slice(3, 9),
           detail: {
             name: self.meta.name,
-            price:  23,
+            price:self.meta.biz_ext.cost,
             imgs:self.meta.photos
           }
         }

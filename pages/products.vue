@@ -46,9 +46,8 @@ export default {
   //要测试一下是否进行编码了没有
   async asyncData(ctx) {
     let keyword = ctx.query.keyword;
-    let city = ctx.store.state.geo.position.city.replace('市','');
-    console.log("product",keyword,city);
-    
+    let city = ctx.store.state.geo.position.city.replace("市", "");
+
     let {
       status,
       data: { count, pois }
@@ -77,7 +76,7 @@ export default {
               name: item.name,
               comment: Math.floor(Math.random() * 10000),
               rate: Number(item.biz_ext.rating),
-              price: Math.floor(Math.random() * 100),
+              price: Number(item.biz_ext.cost),
               scene: item.tag,
               tel: item.tel,
               status: "可订明日",
@@ -96,7 +95,6 @@ export default {
   //使用forEach来循环遍历每个列表索引值和坐标
   mounted() {
     //this.$store.commit("product/getProduct", this.list);
-
     //列表高度
     this.$nextTick(() => {
       let itemCollection = document.querySelectorAll(".s-item");

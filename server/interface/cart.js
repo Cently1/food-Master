@@ -26,6 +26,8 @@ router.post("/create", async ctx => {
     });
     //保存到数据库
     let result = await cart.save();
+    console.log(result);
+    
     if (result) {
       ctx.body = {
         code: 0,

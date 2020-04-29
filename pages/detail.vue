@@ -45,6 +45,8 @@ export default {
   },
   computed: {
     canOrder: function() { 
+      console.log(this.list);
+      
       return this.list.filter(item => item.photos.length).length;
     }
   },

@@ -1,7 +1,7 @@
 import Router from "koa-router";
 import axios from "./utils/axios";
 import Poi from "../dbs/models/poi";
-
+import Detail from "../dbs/models/details";
 import Product from "../dbs/models/products";
 
 let router = new Router({
@@ -10,64 +10,64 @@ let router = new Router({
 
 //search
 router.get("/top", async ctx => {
-  // try {
-  //   let top = await Poi.find({
-  //     name: new RegExp(ctx.query.input),
-  //     city: ctx.query.city
-  //   });
-  //   ctx.body = {
-  //     code: 0,
-  //     top: top.map(item => {
-  //       return {
-  //         name: item.name,
-  //         type: item.type
-  //       };
-  //     }),
-  //     type: top.length ? top[0].type : ""
-  //   };
-  // } catch (e) {
-  //   ctx.body = {
-  //     code: -1,
-  //     top: []
-  //   };
-  // }
-  console.log("woshizuibangde");
-
-  let {
-    status,
-    data: { top }
-  } = await axios.get(`http://cp-tools.cn/search/top`, {
-    params: {
-      input: ctx.query.input,
+  try {
+    let top = await Poi.find({
+      name: new RegExp(ctx.query.input),
       city: ctx.query.city
-    }
-  });
-  ctx.body = {
-    top: status === 200 ? top : []
-  };
-  console.log(top);
-
-  for (let index in top) {
-    let name = top[index].name;
-    let type = top[index].type;
-    let city = "武汉";
-    let province = "湖北";
-    let county = "洪山";
-    let longtide = 114.3;
-    let latitude = 30.6;
-    let areaCode = 898;
-    let create_Product = await Poi.create({
-      name,
-      type,
-      city,
-      province,
-      county,
-      longtide,
-      latitude,
-      areaCode
     });
-    console.log(create_Product);
+    ctx.body = {
+      code: 0,
+      top: top.map(item => {
+        return {
+          name: item.name,
+          type: item.type
+        };
+      }),
+      type: top.length ? top[0].type : ""
+    };
+  } catch (e) {
+    ctx.body = {
+      code: -1,
+      top: []
+    };
   }
+  // console.log("woshizuibangde");
+
+  // let {
+  //   status,
+  //   data: { top }
+  // } = await axios.get(`http://cp-tools.cn/search/top`, {
+  //   params: {
+  //     input: ctx.query.input,
+  //     city: ctx.query.city
+  //   }
+  // });
+  // ctx.body = {
+  //   top: status === 200 ? top : []
+  // };
+  // console.log(top);
+
+  // for (let index in top) {
+  //   let name = top[index].name;
+  //   let type = top[index].type;
+  //   let city = "武汉";
+  //   let province = "湖北";
+  //   let county = "洪山";
+  //   let longtide = 114.3;
+  //   let latitude = 30.6;
+  //   let areaCode = 898;
+  //   let create_Product = await Poi.create({
+  //     name,
+  //     type,
+  //     city,
+  //     province,
+  //     county,
+  //     longtide,
+  //     latitude,
+  //     areaCode
+  //   });
+  //   console.log(create_Product);
+  // }
 });
 
 //hotPlace
@@ -111,17 +111,30 @@ router.get("/hotPlace", async ctx => {
 router.get("/products", async ctx => {
   let keyword = ctx.query.keyword || "旅游";
   let city = ctx.query.city || "北京";
-  console.log(keyword, city);
-
-  let {
-    status,
-    data: { product, more }
-  } = await axios.get("http://cp-tools.cn/search/products", {
-    params: {
-      keyword,
-      city
-    }
+  // let {
+  //   status,
+  //   data: { product, more, login }
+  // } = await axios.get("http://cp-tools.cn/search/products", {
+  //   params: {
+  //     keyword,
+  //     city
+  //   }
+  // });
+  // login = false;
+  // // const { keyword, city } = ctx.request.body;
+  // let create_Product = await Detail.create({
+  //   keyword,
+  //   product,
+  //   more,
+  //   login
+  // });
+  // if (create_Product) {
+  //   console.log("添加成功");
+  // }
+  let { product, more } = await Detail.findOne({
+    keyword
   });
+  let status = 200;
   if (status === 200) {
     ctx.body = {
       product,

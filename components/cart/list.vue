@@ -18,7 +18,7 @@
     </el-table-column>
     <el-table-column label="总价">
       <template slot-scope="scope">
-        <div class="">{{ scope.row.price * scope.row.count }}</div>
+        <div class="">{{ Number(scope.row.price * scope.row.count) }}</div>
       </template>
     </el-table-column>
   </el-table>
