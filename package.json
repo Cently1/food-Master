@@ -30,7 +30,7 @@
     "mongoose": "^5.9.6",
     "node-sass": "^4.13.1",
     "nodemailer": "^6.4.6",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "passport-local": "^1.0.0",
     "qrcode": "^1.4.4",
     "sass": "^1.26.3",
